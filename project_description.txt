@@ -1,0 +1,35 @@
+TODO LIST APPLICATION
+
+PROJECT TITLE: Personal Task Manager
+
+PROJECT PURPOSE:
+A simple web-based to-do list application that helps users organize and manage their daily tasks and projects. Users can create tasks, mark them as complete, edit existing tasks, and delete tasks they no longer need.
+
+INTENDED USERS:
+Students, professionals, and anyone who wants a straightforward way to keep track of their to-do items and manage their daily productivity.
+
+KEY FEATURES:
+1. User Authentication System:
+   - User Registration: New users can create an account with first name, last name, email, and password
+   - User Login: Existing users can log in with their email and password
+
+2. Task Management (To-Do Items):
+   - Create Tasks: Users can add new tasks with a description/title
+   - View Tasks: Users can see all their tasks on the dashboard
+   - Edit Tasks: Users can modify existing task descriptions
+   - Delete Tasks: Users can remove tasks from their list
+
+3. Navigation:
+   - Easy navigation between Register, Login, and Task pages
+   - User can access all main pages from any page via navigation bar
+
+ENTITIES:
+1. Users (first name, last name, email, password)
+2. Tasks/To-Dos (task description, completion status, user reference)
+
+PAGES:
+- register.html: User registration form
+- login.html: User login form
+- tasks.html: Task/To-Do management page
+
+This application provides a foundation for learning full-stack development while maintaining simplicity for the initial implementation.
