@@ -1,0 +1,507 @@
+/* ========================================
+   PERSONAL TASK MANAGER - STYLESHEET
+   ======================================== */
+
+/* Import Google Fonts for better typography */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap');
+
+/* ========================================
+   GLOBAL STYLES
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    color: #333;
+}
+
+/* ========================================
+   NAVIGATION STYLES (Flexbox Layout)
+   ======================================== */
+
+nav {
+    background: linear-gradient(90deg, #2c3e50 0%, #34495e 100%);
+    padding: 1rem 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+nav li {
+    transition: transform 0.3s ease;
+}
+
+nav li:hover {
+    transform: translateY(-2px);
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+nav a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+/* ========================================
+   CONTAINER & LAYOUT STYLES
+   ======================================== */
+
+.container {
+    max-width: 600px;
+    margin: 2rem auto;
+    background: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    animation: slideUp 0.5s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Smaller container for login/register pages */
+.container[role="form"] {
+    max-width: 450px;
+}
+
+/* ========================================
+   HEADING STYLES
+   ======================================== */
+
+h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #2c3e50;
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    letter-spacing: 1px;
+}
+
+h2 {
+    color: #34495e;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 3px solid #667eea;
+    padding-bottom: 0.75rem;
+    display: inline-block;
+}
+
+h1 + .form-section h2,
+h1 + div h2 {
+    font-size: 1.3rem;
+}
+
+/* ========================================
+   FORM STYLES
+   ======================================== */
+
+.form-section {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.form-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+label {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+}
+
+/* ========================================
+   INPUT FIELD STYLES
+   ======================================== */
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+    padding: 0.9rem;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: 'Roboto', sans-serif;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    background-color: white;
+    box-shadow: 0 0 15px rgba(102, 126, 234, 0.3);
+    transform: translateY(-2px);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* ========================================
+   BUTTON STYLES
+   ======================================== */
+
+input[type="submit"],
+button {
+    padding: 0.9rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Login page submit button */
+.login-form input[type="submit"],
+form:has(input[id="email"]) input[type="submit"] {
+    background: linear-gradient(135deg, #2196F3 0%, #0b7dda 100%);
+    color: white;
+    margin-top: 1rem;
+}
+
+.login-form input[type="submit"]:hover,
+form:has(input[id="email"]) input[type="submit"]:hover {
+    background: linear-gradient(135deg, #0b7dda 0%, #095dd4 100%);
+    box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Register page submit button */
+.register-form input[type="submit"],
+form:has(input[id="firstName"]) input[type="submit"] {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: white;
+    margin-top: 1rem;
+}
+
+.register-form input[type="submit"]:hover,
+form:has(input[id="firstName"]) input[type="submit"]:hover {
+    background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Task page submit button */
+.task-form input[type="submit"],
+form:has(textarea[id="taskText"]) input[type="submit"] {
+    background: linear-gradient(135deg, #FF9800 0%, #e68900 100%);
+    color: white;
+    margin-top: 1rem;
+}
+
+.task-form input[type="submit"]:hover,
+form:has(textarea[id="taskText"]) input[type="submit"]:hover {
+    background: linear-gradient(135deg, #e68900 0%, #cc7700 100%);
+    box-shadow: 0 6px 20px rgba(255, 152, 0, 0.4);
+    transform: translateY(-2px);
+}
+
+/* ========================================
+   TASK ITEM STYLES
+   ======================================== */
+
+.task-list {
+    margin-top: 2rem;
+}
+
+.task-item {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 1.25rem;
+    margin: 1rem 0;
+    border-left: 5px solid #FF9800;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    gap: 1rem;
+}
+
+.task-item:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px);
+    background: linear-gradient(135deg, #ffffff 0%, #f0f4f8 100%);
+}
+
+.task-text {
+    flex: 1;
+}
+
+.task-text strong {
+    display: block;
+    color: #2c3e50;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.task-text small {
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.task-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+/* ========================================
+   ACTION BUTTON STYLES
+   ======================================== */
+
+.edit-btn {
+    background: linear-gradient(135deg, #2196F3 0%, #0b7dda 100%);
+    color: white;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+}
+
+.edit-btn:hover {
+    background: linear-gradient(135deg, #0b7dda 0%, #095dd4 100%);
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
+    transform: scale(1.05);
+}
+
+.delete-btn {
+    background: linear-gradient(135deg, #f44336 0%, #da190b 100%);
+    color: white;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+}
+
+.delete-btn:hover {
+    background: linear-gradient(135deg, #da190b 0%, #c21209 100%);
+    box-shadow: 0 4px 12px rgba(244, 67, 54, 0.4);
+    transform: scale(1.05);
+}
+
+/* ========================================
+   IMAGE STYLES
+   ======================================== */
+
+.hero-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.task-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-bottom: 0.5rem;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 768px) {
+    .container {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    nav ul {
+        gap: 1rem;
+    }
+
+    nav a {
+        font-size: 0.9rem;
+        padding: 0.6rem 1rem;
+    }
+
+    .task-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .task-actions {
+        width: 100%;
+    }
+
+    .task-actions button {
+        flex: 1;
+    }
+
+    .hero-image {
+        height: 180px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+
+    .container {
+        border-radius: 8px;
+        padding: 1.25rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.1rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    textarea,
+    input[type="submit"],
+    button {
+        font-size: 16px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .task-item {
+        padding: 1rem;
+    }
+
+    .hero-image {
+        height: 150px;
+    }
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+.text-center {
+    text-align: center;
+}
+
+.mt-2 {
+    margin-top: 2rem;
+}
+
+.mb-2 {
+    margin-bottom: 2rem;
+}
+
+.hidden {
+    display: none;
+}
+
+.success-message {
+    background-color: #4CAF50;
+    color: white;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+.error-message {
+    background-color: #f44336;
+    color: white;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-weight: 600;
+}

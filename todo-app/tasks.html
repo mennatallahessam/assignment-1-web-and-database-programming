@@ -4,165 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tasks - Todo List App</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-        }
-        
-        nav {
-            background-color: #333;
-            padding: 1rem 0;
-        }
-        
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-        }
-        
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 0.5rem 1rem;
-            transition: background-color 0.3s;
-        }
-        
-        nav a:hover {
-            background-color: #555;
-            border-radius: 4px;
-        }
-        
-        .container {
-            max-width: 600px;
-            margin: 2rem auto;
-            background-color: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        h1 {
-            text-align: center;
-            margin-bottom: 2rem;
-            color: #333;
-        }
-        
-        .form-section {
-            margin-bottom: 2rem;
-            padding-bottom: 2rem;
-            border-bottom: 2px solid #ddd;
-        }
-        
-        h2 {
-            color: #333;
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-        }
-        
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        
-        label {
-            font-weight: bold;
-            color: #333;
-        }
-        
-        textarea {
-            padding: 0.75rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-            font-family: Arial, sans-serif;
-            resize: vertical;
-            min-height: 100px;
-        }
-        
-        textarea:focus {
-            outline: none;
-            border-color: #FF9800;
-            box-shadow: 0 0 5px rgba(255, 152, 0, 0.3);
-        }
-        
-        input[type="submit"] {
-            background-color: #FF9800;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 1rem;
-            transition: background-color 0.3s;
-            padding: 0.75rem;
-            border: none;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-        
-        input[type="submit"]:hover {
-            background-color: #e68900;
-        }
-        
-        .task-list {
-            margin-top: 2rem;
-        }
-        
-        .task-item {
-            background-color: #f9f9f9;
-            padding: 1rem;
-            margin: 0.5rem 0;
-            border-left: 4px solid #FF9800;
-            border-radius: 4px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .task-text {
-            flex: 1;
-        }
-        
-        .task-actions {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        button {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-        
-        .edit-btn {
-            background-color: #2196F3;
-            color: white;
-        }
-        
-        .edit-btn:hover {
-            background-color: #0b7dda;
-        }
-        
-        .delete-btn {
-            background-color: #f44336;
-            color: white;
-        }
-        
-        .delete-btn:hover {
-            background-color: #da190b;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <nav>
@@ -174,7 +17,9 @@
     </nav>
     
     <div class="container">
-        <h1>My Tasks</h1>
+        <h1><i class="fas fa-tasks"></i> My Tasks</h1>
+        
+        <img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&h=300&fit=crop" alt="Task Management" class="hero-image">
         
         <div class="form-section">
             <h2>Create a New Task</h2>
