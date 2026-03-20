@@ -29,6 +29,6 @@ A simple web-based to-do list application that helps users organize and manage t
 
 ## Technologies Used
 - HTML5
-- CSS3 (Vanilla)
+- CSS
 - JavaScript
 - Database (Planned for future assignments)
