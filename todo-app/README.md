@@ -13,6 +13,10 @@ A simple web-based to-do list application that helps users organize and manage t
 
 ## Entity Relationship Diagram (ERD)
 
+![Normalized ERD](images/erd_normalized.png)
+
+### Mermaid Representation (Dynamic)
+
 ```mermaid
 erDiagram
     USER ||--o{ TASK : creates
