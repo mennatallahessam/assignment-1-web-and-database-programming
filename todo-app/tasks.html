@@ -27,34 +27,20 @@
                 <label for="taskText">Task Description:</label>
                 <textarea id="taskText" name="taskText" placeholder="Enter your task here..." required></textarea>
                 
+                <label for="categorySelect">Category:</label>
+                <select id="categorySelect" name="category_id">
+                    <option value="">Select a Category</option>
+                </select>
+                
                 <input type="submit" value="Add Task">
             </form>
         </div>
         
         <div class="task-list">
             <h2>Your Tasks</h2>
-            
-            <div class="task-item">
-                <div class="task-text">
-                    <strong>Sample Task 1</strong><br>
-                    <small>Complete project documentation</small>
-                </div>
-                <div class="task-actions">
-                    <button class="edit-btn">Edit</button>
-                    <button class="delete-btn">Delete</button>
-                </div>
-            </div>
-            
-            <div class="task-item">
-                <div class="task-text">
-                    <strong>Sample Task 2</strong><br>
-                    <small>Review code changes</small>
-                </div>
-                <div class="task-actions">
-                    <button class="edit-btn">Edit</button>
-                    <button class="delete-btn">Delete</button>
-                </div>
-            </div>
+            <ul id="taskList">
+                <!-- Tasks will be loaded here dynamically -->
+            </ul>
         </div>
     </div>
     

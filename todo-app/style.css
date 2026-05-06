@@ -177,6 +177,7 @@ label {
 input[type="text"],
 input[type="email"],
 input[type="password"],
+select,
 textarea {
     padding: 0.9rem;
     border: 2px solid #ddd;
@@ -185,11 +186,13 @@ textarea {
     font-family: 'Roboto', sans-serif;
     transition: all 0.3s ease;
     background-color: #f8f9fa;
+    width: 100%;
 }
 
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus,
+select:focus,
 textarea:focus {
     outline: none;
     border-color: #667eea;
@@ -275,7 +278,12 @@ form:has(textarea[id="taskText"]) input[type="submit"]:hover {
     margin-top: 2rem;
 }
 
-.task-item {
+#taskList {
+    list-style: none;
+    padding: 0;
+}
+
+#taskList li {
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     padding: 1.25rem;
     margin: 1rem 0;
@@ -289,33 +297,23 @@ form:has(textarea[id="taskText"]) input[type="submit"]:hover {
     gap: 1rem;
 }
 
-.task-item:hover {
+#taskList li:hover {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     transform: translateY(-4px);
     background: linear-gradient(135deg, #ffffff 0%, #f0f4f8 100%);
 }
 
-.task-text {
+#taskList li span {
     flex: 1;
-}
-
-.task-text strong {
-    display: block;
     color: #2c3e50;
     font-size: 1.1rem;
-    margin-bottom: 0.5rem;
 }
 
-.task-text small {
-    color: #666;
+#taskList li button {
+    background: linear-gradient(135deg, #f44336 0%, #da190b 100%);
+    color: white;
+    padding: 0.6rem 1.2rem;
     font-size: 0.9rem;
-    line-height: 1.5;
-}
-
-.task-actions {
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
 }
 
 /* ========================================

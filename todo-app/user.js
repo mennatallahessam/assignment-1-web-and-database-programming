@@ -30,41 +30,57 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Register function
-function register() {
+async function register() {
     const firstName = document.getElementById('firstName').value;
     const lastName = document.getElementById('lastName').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     
-    // Generate a simple ID (in real app, backend would handle this)
-    const id = Date.now();
-    
-    // Create new User object
-    const newUser = new User(id, firstName, lastName, email, password);
-    
-    // Print the object to console
-    console.log('Registration - New User Object Created:');
-    console.log(newUser);
-    
-    // Optional: Show success message
-    alert('Registration successful! Check the console to see the User object.');
+    try {
+        const response = await fetch('/api/auth/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ firstName, lastName, email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            localStorage.setItem('token', data.token);
+            alert('Registration successful!');
+            window.location.href = 'tasks.html';
+        } else {
+            alert(data.msg || 'Registration failed');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred during registration');
+    }
 }
 
 // Login function
-function login() {
+async function login() {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     
-    // Generate a simple ID (in real app, backend would handle this)
-    const id = Date.now();
-    
-    // Create User object with login credentials
-    const loginUser = new User(id, '', '', email, password);
-    
-    // Print the object to console
-    console.log('Login - User Object Created:');
-    console.log(loginUser);
-    
-    // Optional: Show success message
-    alert('Login attempt! Check the console to see the User object.');
+    try {
+        const response = await fetch('/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            localStorage.setItem('token', data.token);
+            alert('Login successful!');
+            window.location.href = 'tasks.html';
+        } else {
+            alert(data.msg || 'Invalid credentials');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred during login');
+    }
 }

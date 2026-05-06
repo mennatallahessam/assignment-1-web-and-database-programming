@@ -8,7 +8,7 @@ class Task {
     }
 }
 
-// Handle task form submission
+// Handle task form submission and initial load
 document.addEventListener('DOMContentLoaded', function() {
     const taskForm = document.getElementById('taskForm');
     if (taskForm) {
@@ -17,27 +17,111 @@ document.addEventListener('DOMContentLoaded', function() {
             createTask();
         });
     }
+    
+    // Check if logged in
+    const token = localStorage.getItem('token');
+    if (!token && window.location.pathname.includes('tasks.html')) {
+        window.location.href = 'login.html';
+        return;
+    }
+
+    // Load categories and tasks
+    loadCategories();
+    loadTasks();
 });
 
+// Load categories from backend
+async function loadCategories() {
+    try {
+        const response = await fetch('/api/categories');
+        const categories = await response.json();
+        const categorySelect = document.getElementById('categorySelect');
+        
+        if (categorySelect) {
+            categories.forEach(cat => {
+                const option = document.createElement('option');
+                option.value = cat.category_id;
+                option.textContent = cat.category_name;
+                categorySelect.appendChild(option);
+            });
+        }
+    } catch (error) {
+        console.error('Error loading categories:', error);
+    }
+}
+
+// Load tasks from backend
+async function loadTasks() {
+    const token = localStorage.getItem('token');
+    try {
+        const response = await fetch('/api/tasks', {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const tasks = await response.json();
+        
+        const taskList = document.getElementById('taskList');
+        if (taskList) {
+            taskList.innerHTML = '';
+            tasks.forEach(task => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <span style="${task.is_completed ? 'text-decoration: line-through;' : ''}">
+                        ${task.task_description} <strong>(${task.category_name || 'No Category'})</strong>
+                    </span>
+                    <button onclick="deleteTask(${task.task_id})">Delete</button>
+                `;
+                taskList.appendChild(li);
+            });
+        }
+    } catch (error) {
+        console.error('Error loading tasks:', error);
+    }
+}
+
 // Create task function
-function createTask() {
-    const taskText = document.getElementById('taskText').value;
+async function createTask() {
+    const task_description = document.getElementById('taskText').value;
+    const category_id = document.getElementById('categorySelect').value;
+    const token = localStorage.getItem('token');
     
-    // Generate a simple ID (in real app, backend would handle this)
-    const id = Date.now();
-    const userId = 1; // In real app, this would come from the logged-in user
-    const dateCreated = new Date().toISOString();
-    
-    // Create new Task object
-    const newTask = new Task(id, userId, taskText, dateCreated);
-    
-    // Print the object to console
-    console.log('Task Object Created:');
-    console.log(newTask);
-    
-    // Optional: Clear the form
-    document.getElementById('taskForm').reset();
-    
-    // Optional: Show success message
-    alert('Task created! Check the console to see the Task object.');
+    try {
+        const response = await fetch('/api/tasks', {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ task_description, category_id })
+        });
+
+        if (response.ok) {
+            document.getElementById('taskForm').reset();
+            loadTasks();
+        } else {
+            const data = await response.json();
+            alert(data.msg || 'Failed to create task');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred');
+    }
+}
+
+// Delete task function
+async function deleteTask(id) {
+    const token = localStorage.getItem('token');
+    if (!confirm('Are you sure?')) return;
+
+    try {
+        const response = await fetch(`/api/tasks/${id}`, {
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        if (response.ok) {
+            loadTasks();
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
 }
