@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const dbPromise = require('../config/db');
+const User = require('../models/User');
+const auth = require('../middleware/auth');
 
 // @route    POST api/auth/register
 // @desc     Register user
@@ -10,22 +11,15 @@ router.post('/register', async (req, res) => {
     const { firstName, lastName, email, password } = req.body;
 
     try {
-        const db = await dbPromise;
-        let user = await db.get('SELECT * FROM users WHERE email = ?', [email]);
+        let user = await User.findByEmail(email);
         if (user) {
             return res.status(400).json({ msg: 'User already exists' });
         }
 
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
-
-        const result = await db.run(
-            'INSERT INTO users (first_name, last_name, email, password) VALUES (?, ?, ?, ?)',
-            [firstName, lastName, email, hashedPassword]
-        );
+        const userId = await User.create(firstName, lastName, email, password);
 
         const payload = {
-            user: { id: result.lastID }
+            user: { id: userId }
         };
 
         jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' }, (err, token) => {
@@ -44,8 +38,7 @@ router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        const db = await dbPromise;
-        let user = await db.get('SELECT * FROM users WHERE email = ?', [email]);
+        let user = await User.findByEmail(email);
         if (!user) {
             return res.status(400).json({ msg: 'Invalid Credentials' });
         }
@@ -63,6 +56,31 @@ router.post('/login', async (req, res) => {
             if (err) throw err;
             res.json({ token });
         });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+});
+
+// @route    GET api/auth/me
+// @desc     Get current user profile
+router.get('/me', auth, async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id);
+        res.json(user);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+});
+
+// @route    PUT api/auth/me
+// @desc     Update user profile
+router.put('/me', auth, async (req, res) => {
+    const { firstName, lastName, email } = req.body;
+    try {
+        await User.update(req.user.id, firstName, lastName, email);
+        res.json({ msg: 'Profile updated' });
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');
