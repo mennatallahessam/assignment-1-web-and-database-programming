@@ -110,7 +110,6 @@ async function createTask() {
 // Delete task function
 async function deleteTask(id) {
     const token = localStorage.getItem('token');
-    if (!confirm('Are you sure?')) return;
 
     try {
         const response = await fetch(`/api/tasks/${id}`, {
